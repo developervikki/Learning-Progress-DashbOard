@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Learning Dashboard</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- tsParticles for background -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.min.js"></script>
+  
+  <!-- Chart.js for interactive charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="flex h-screen bg-gradient-to-br from-purple-700 via-indigo-800 to-blue-900 text-white overflow-hidden">
+
+  <!-- Sidebar -->
+  <aside class="w-64 bg-gray-900 flex flex-col p-6 space-y-6 shadow-lg">
+    <h2 class="text-3xl font-extrabold tracking-wide">LearnAI</h2>
+    <nav class="flex flex-col space-y-3 mt-8">
+        <a href="{{ url_for('dashboard') }}" class="py-2 px-3 rounded bg-indigo-600 font-semibold shadow-md hover:bg-indigo-500 transition">Dashboard</a>
+        <a href="{{ url_for('progress') }}" class="py-2 px-3 rounded hover:bg-gray-700 transition">My Progress</a>
+        <a href="{{ url_for('courses') }}" class="py-2 px-3 rounded hover:bg-gray-700 transition">Courses</a>
+        <a href="#" class="py-2 px-3 rounded hover:bg-gray-700 transition">Settings</a>
+      </nav>
+      
+    <button onclick="window.location.href='{{ url_for('logout') }}'" class="mt-auto bg-red-600 py-2 px-4 rounded hover:bg-red-700 transition font-semibold shadow-lg">Logout</button>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="flex-1 flex flex-col overflow-auto">
+    <!-- Particle Background -->
+    <div id="tsparticles" class="fixed inset-0 -z-10"></div>
+
+    <!-- Header -->
+    <header class="flex justify-between items-center p-6 border-b border-gray-700">
+      <h1 class="text-3xl font-bold">Welcome Developer, {{ username }}</h1>
+      <div class="flex items-center space-x-4">
+        <div class="text-sm text-gray-300">Your personalized learning dashboard</div>
+      </div>
+    </header>
+
+    <!-- Dashboard Content -->
+    <main class="p-6 overflow-y-auto flex-1 space-y-8">
+      <!-- KPIs -->
+      <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-indigo-600 bg-opacity-70 rounded-lg shadow-lg p-6 flex flex-col items-center">
+          <h3 class="text-xl font-semibold mb-2">Average Score</h3>
+          <p class="text-4xl font-bold">85%</p>
+        </div>
+        <div class="bg-indigo-600 bg-opacity-70 rounded-lg shadow-lg p-6 flex flex-col items-center">
+          <h3 class="text-xl font-semibold mb-2">Total Study Hours</h3>
+          <p class="text-4xl font-bold">42 hrs</p>
+        </div>
+        <div class="bg-indigo-600 bg-opacity-70 rounded-lg shadow-lg p-6 flex flex-col items-center">
+          <h3 class="text-xl font-semibold mb-2">Completed Exercises</h3>
+          <p class="text-4xl font-bold">120</p>
+        </div>
+      </section>
+
+      <!-- Charts -->
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Line Chart: Learning Progress -->
+        <div class="bg-gray-800 bg-opacity-70 rounded-lg p-6 shadow-lg">
+          <h2 class="text-2xl font-bold mb-4">Learning Progress Over Time</h2>
+          <canvas id="progressChart" class="w-full h-64"></canvas>
+        </div>
+
+        <!-- Bar Chart: Subject Scores -->
+        <div class="bg-gray-800 bg-opacity-70 rounded-lg p-6 shadow-lg">
+          <h2 class="text-2xl font-bold mb-4">Latest Subject Scores</h2>
+          <canvas id="subjectChart" class="w-full h-64"></canvas>
+        </div>
+      </section>
+
+      <!-- AI Suggestions -->
+      <section class="bg-gray-800 bg-opacity-70 rounded-lg p-6 shadow-lg">
+        <h2 class="text-2xl font-bold mb-4">AI-Powered Study Suggestions</h2>
+        <ul class="list-disc list-inside space-y-2 text-lg">
+          <li>Focus on Algebra and Geometry in Math for next week.</li>
+          <li>Review Physics fundamentals and watch recommended videos.</li>
+          <li>Practice English vocabulary using daily flashcards.</li>
+          <li>Try interactive quizzes to strengthen weak areas.</li>
+        </ul>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-4 text-gray-400 border-t border-gray-700">
+      &copy; 2025 LearnAI Dashboard
+    </footer>
+  </div>
+
+  <!-- tsParticles init -->
+  <script>
+    tsParticles.load("tsparticles", {
+      fpsLimit: 60,
+      background: { color: "transparent" },
+      particles: {
+        number: { value: 50, density: { enable: true, area: 900 } },
+        color: { value: "#ffffff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.15 },
+        size: { value: 3, random: true },
+        move: { enable: true, speed: 1, outModes: { default: "out" } },
+      },
+      interactivity: {
+        events: { onHover: { enable: true, mode: "repulse" }, onClick: { enable: true, mode: "push" }, resize: true },
+        modes: { repulse: { distance: 100, duration: 0.4 }, push: { quantity: 4 } }
+      },
+      detectRetina: true
+    });
+  </script>
+
+  <!-- Chart.js scripts -->
+  <script>
+    // Sample data for progress chart over dates
+    const progressLabels = ['2025-06-01', '2025-06-02', '2025-06-03', '2025-06-04', '2025-06-05', '2025-06-06', '2025-06-07'];
+    const progressData = {
+      labels: progressLabels,
+      datasets: [
+        {
+          label: 'Math',
+          data: [78, 82, 85, 88, 90, 87, 89],
+          borderColor: 'rgba(132, 94, 247, 1)',
+          backgroundColor: 'rgba(132, 94, 247, 0.3)',
+          fill: true,
+          tension: 0.3,
+          pointRadius: 4,
+          pointHoverRadius: 6,
+        },
+        {
+          label: 'Science',
+          data: [85, 88, 90, 92, 93, 91, 94],
+          borderColor: 'rgba(94, 179, 247, 1)',
+          backgroundColor: 'rgba(94, 179, 247, 0.3)',
+          fill: true,
+          tension: 0.3,
+          pointRadius: 4,
+          pointHoverRadius: 6,
+        },
+        {
+          label: 'English',
+          data: [90, 92, 91, 93, 95, 94, 96],
+          borderColor: 'rgba(247, 129, 132, 1)',
+          backgroundColor: 'rgba(247, 129, 132, 0.3)',
+          fill: true,
+          tension: 0.3,
+          pointRadius: 4,
+          pointHoverRadius: 6,
+        }
+      ]
+    };
+
+    const progressConfig = {
+      type: 'line',
+      data: progressData,
+      options: {
+        responsive: true,
+        interaction: {
+          mode: 'nearest',
+          axis: 'x',
+          intersect: false
+        },
+        plugins: {
+          legend: { position: 'top' },
+          tooltip: { enabled: true }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100
+          }
+        }
+      }
+    };
+
+    const progressChart = new Chart(
+      document.getElementById('progressChart'),
+      progressConfig
+    );
+
+    // Bar chart for latest subject scores
+    const subjectData = {
+      labels: ['Math', 'Science', 'English'],
+      datasets: [{
+        label: 'Score',
+        data: [89, 94, 96],
+        backgroundColor: [
+          'rgba(132, 94, 247, 0.8)',
+          'rgba(94, 179, 247, 0.8)',
+          'rgba(247, 129, 132, 0.8)'
+        ],
+        borderRadius: 6,
+      }]
+    };
+
+    const subjectConfig = {
+      type: 'bar',
+      data: subjectData,
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true, max: 100 }
+        },
+        plugins: {
+          legend: { display: false },
+          tooltip: { enabled: true }
+        }
+      }
+    };
+
+    const subjectChart = new Chart(
+      document.getElementById('subjectChart'),
+      subjectConfig
+    );
+  </script>
+</body>
+</html>

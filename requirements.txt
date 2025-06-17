@@ -1,0 +1,7 @@
+Flask
+flask-mysqldb
+flask-login
+pandas
+numpy
+scikit-learn
+plotly
