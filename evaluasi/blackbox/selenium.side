@@ -1,0 +1,106 @@
+{
+  "id": "9c9d5293-5c47-4292-a0f6-2ce9c3c90f13",
+  "version": "2.0",
+  "name": "tes2",
+  "url": "https://curly-invention-7vr7xp99wq59f74p-5000.app.github.dev",
+  "tests": [{
+    "id": "05c63ee8-d74c-45b1-8fd2-52f3727bd10f",
+    "name": "cobaaa",
+    "commands": [{
+      "id": "f2efb2f7-7e18-4736-a63b-af9043271ccf",
+      "comment": "",
+      "command": "open",
+      "target": "/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ec66de90-8049-4b5e-aa33-a60475baa26a",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "928x691",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "169da585-cabe-4047-846e-a24a1af48831",
+      "comment": "",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "194839d1-54ec-4d89-833b-785b838b4a22",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "dilah"
+    }, {
+      "id": "c383d6d4-f3df-48d2-9d2a-0386fbe03911",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4d50c28e-55f6-4956-93b5-8980d28cb35d",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "niska"
+    }, {
+      "id": "e730dc4b-b0f8-4ac9-bd7a-9c16cff8aa3f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bg-indigo-600",
+      "targets": [
+        ["css=.bg-indigo-600", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "cb0e09f5-4aec-4ffa-baa9-0ed124bf61c0",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "111dc6d7-82a5-46f4-b333-883d7e7911d0",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["05c63ee8-d74c-45b1-8fd2-52f3727bd10f"]
+  }],
+  "urls": ["https://curly-invention-7vr7xp99wq59f74p-5000.app.github.dev/"],
+  "plugins": []
+}
